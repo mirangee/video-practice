@@ -47,4 +47,12 @@ public class AppUi {
         System.out.println("##### 5. 상위 메뉴로 돌아가기");
         System.out.println("==========================================");
     }
+
+    public static void showRentManageMenu() {
+        System.out.println("\n========== DVD 대여 및 반납 관리 메뉴입니다 ==========");
+        System.out.println("##### 1. DVD 대여하기");
+        System.out.println("##### 2. DVD 반납 처리");
+        System.out.println("##### 3. 상위 메뉴로 돌아가기");
+        System.out.println("==========================================");
+    }
 }

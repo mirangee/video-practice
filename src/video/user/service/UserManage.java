@@ -6,6 +6,7 @@ import video.user.domain.User;
 import video.user.repository.UserRepository;
 
 import java.util.List;
+import java.util.Map;
 
 import static video.ui.AppUi.*;
 import static video.user.repository.UserRepository.*;
@@ -67,16 +68,7 @@ public class UserManage implements Appservice {
             int num = inputNumber(">>> ");
             switch (num) {
                 case 1:
-                    String name = inputInfo("찾을 회원명: ");
-                    List<User> userByName = userRepository.findUserByName(name);
-                    if (userByName.isEmpty()) {
-                        System.out.println("*********** 찾을 수 없는 회원 정보입니다 **********");
-                        break;
-                    }
-                    System.out.println("\n*********** 검색된 회원 정보입니다 **********");
-                    for (User user : userByName) {
-                        System.out.println(user);
-                    }
+                    searchUserByName();
                     break;
                 case 2:
                     String contact = inputInfo("찾을 연락처: ");
@@ -99,24 +91,36 @@ public class UserManage implements Appservice {
 
     }
 
+    private static void searchUserByName() {
+        String name = inputInfo("찾을 회원명: ");
+        Map<Integer, User> userByName = findUserByName(name);
+        if (userByName.isEmpty()) {
+            System.out.println("*********** 찾을 수 없는 회원 정보입니다 **********");
+            return;
+        }
+        System.out.println("\n*********** 검색된 회원 정보입니다 **********");
+        for (User user : userByName.values()) {
+            System.out.println(user);
+        }
+    }
+
     private static void delete() {
         while (true) {
             System.out.println("\n===================== 어떤 회원 정보를 삭제할까요? ======================");
             String name = inputInfo("삭제할 회원명: ");
-            List<User> userByName = userRepository.findUserByName(name);
-            if (userByName == null) {
+            Map<Integer, User> userByName = findUserByName(name);
+            if (userByName.isEmpty()) {
                 System.out.println("*********** 찾을 수 없는 회원 정보입니다 **********");
                 continue;
             }
             System.out.println("\n********** 회원명 '" + name + "'의 검색 결과입니다. **********");
-            for (User user : userByName) {
+            for (User user : userByName.values()) {
                 System.out.println(user);
             }
             while (true) {
                 System.out.println("회원 정보 확인 후 삭제할 회원의 '회원번호'를 입력하세요.");
                 int num = inputNumber(">>> ");
-                boolean flag = false;
-                for (User user : userByName) {
+                for (User user : userByName.values()) {
                     if(user.getUserNumber() == num) {
                         userRepository.delUserData(num);
                         System.out.println("********** 삭제 완료! *********");

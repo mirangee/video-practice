@@ -2,6 +2,8 @@ package video.dvd.domain;
 
 import video.user.domain.User;
 
+import java.time.LocalDate;
+
 public class Dvd {
     private static int movieSequence = 0;
     private int dvdNumber; //dvd 고유번호
@@ -11,9 +13,10 @@ public class Dvd {
 
     private int fee; //대여료
 
-
     private boolean availability; // 대여가능 여부
     private User rentalUser; //대여회원
+
+    private LocalDate dueDate; // DVD 반납 예정일
 
     public Dvd(String title, String nation, int madeYear) {
         this.dvdNumber = ++movieSequence;
@@ -34,7 +37,12 @@ public class Dvd {
                 ", 제작연도: " + madeYear +
                 ", 대여료: " + fee +
                 ", 대여가능 여부: " + flag +
-                ", 대여자: " + rentalUser;
+                ", 대여자: " + rentalUser.getName() +
+                ", 반납 예정일: " + dueDate;
+    }
+
+    public int getFee() {
+        return fee;
     }
 
     public static int getMovieSequence() {
@@ -92,4 +100,13 @@ public class Dvd {
     public void setRentalUser(User rentalUser) {
         this.rentalUser = rentalUser;
     }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
 }
+

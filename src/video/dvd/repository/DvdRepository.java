@@ -64,4 +64,27 @@ public class DvdRepository {
             }
         }
     }
+
+//    public static Map<Integer, Dvd> findDvdByAvailability() {
+//        Map<Integer, Dvd> availableDvdList = new HashMap<>();
+//        Map<Integer, Dvd> notAvailableDvdList = new HashMap<>();
+//        for (Dvd dvd : dvdDatabase.values()) {
+//            if(dvd.isAvailability()) {
+//                availableDvdList.put(dvd.getDvdNumber(), dvd);
+//            } else {
+//                notAvailableDvdList.put(dvd.getDvdNumber(), dvd);
+//            }
+//        }
+//        return availableDvdList;
+//    }
+
+    public static Map<Integer, Dvd> findDvdByAvailability(boolean flag) {
+        Map<Integer, Dvd> dvdListByAvailability = new HashMap<>();
+        for (Dvd dvd : dvdDatabase.values()) {
+            if(dvd.isAvailability() == flag) {
+                dvdListByAvailability.put(dvd.getDvdNumber(), dvd);
+            }
+        }
+        return dvdListByAvailability;
+    }
 }

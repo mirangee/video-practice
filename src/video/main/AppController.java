@@ -2,6 +2,7 @@ package video.main;
 
 import video.common.Appservice;
 import video.dvd.service.DvdManage;
+import video.rent.service.RentManage;
 import video.user.service.UserManage;
 
 public class AppController {
@@ -14,7 +15,7 @@ public class AppController {
                 service = new UserManage();
                 break;
             case 2: // DVD 대여 및 반납 관리
-
+                service = new RentManage();
                 break;
             case 3: // DVD 관리
                 service = new DvdManage();
@@ -24,7 +25,7 @@ public class AppController {
                 System.exit(0);
                 return;
             default:
-                System.out.println("없는 메뉴 번호에요ㅠㅠ");
+                System.out.println("##### 없는 메뉴 번호에요ㅠㅠ");
         }
 
         service.start();

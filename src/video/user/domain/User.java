@@ -6,7 +6,7 @@ public class User {
     private String name;
     private String contact;
     private Grade grade; // 회원등급
-    private int totalPaying; // 총 결제 금액, 이에 따라 회원등급 달라짐
+    private int totalPaying = 0; // 총 결제 금액, 이에 따라 회원등급 달라짐
 
     public User(String name, String contact, Grade grade, int totalPaying) {
         this.userNumber = ++sequence; // 회원 생성될 때 회원고유 번호 하나 올려서 대입
@@ -61,7 +61,7 @@ public class User {
     }
 
     public void setTotalPaying(int totalPaying) {
-        this.totalPaying = totalPaying;
+        this.totalPaying += totalPaying;
     }
 
     @Override

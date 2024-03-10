@@ -42,17 +42,17 @@ public class UserRepository {
         userDatabase.put(newUser.getUserNumber(), newUser);
     }
 
-    public List<User> findUserByName(String name) {
-        List<User> userList = new ArrayList<>();
+    public static Map<Integer, User> findUserByName(String name) {
+        Map<Integer, User> userList = new HashMap<>();
         for (int userNumber : userDatabase.keySet()) {
             if (userDatabase.get(userNumber).getName().equals(name)) {
-                userList.add(userDatabase.get(userNumber));
+                userList.put(userNumber, userDatabase.get(userNumber));
             }
         }
         return userList;
     }
 
-    public List<User> findUserByContact(String contact) {
+    public static List<User> findUserByContact(String contact) {
         List<User> userList = new ArrayList<>();
         for (int userNumber : userDatabase.keySet()) {
             if (userDatabase.get(userNumber).getContact().equals(contact)) {
