@@ -39,4 +39,8 @@ public class DvdRepository {
     public static Map<Integer, Dvd> getDvdDatabase() {
         return dvdDatabase;
     }
+
+    public static void addDvd(Dvd newDvd) {
+        dvdDatabase.put(newDvd.getDvdNumber(), newDvd);
+    }
 }
