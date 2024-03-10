@@ -21,13 +21,12 @@ public class DvdManage implements Appservice {
                     break;
                 case 2: // DVD 추가
                     addNewDvd();
-//                    join();
                     break;
                 case 3: // DVD 검색
                     searchDvd();
                     break;
                 case 4: // DVD 삭제
-//                    delete();
+                    deleteDvd();
                     break;
                 case 5: // 상위 메뉴 이동
                     return;
@@ -57,7 +56,7 @@ public class DvdManage implements Appservice {
         showDvdList();
     }
 
-    private void searchDvd() {
+    private static void searchDvd() {
         System.out.println("\n========== Dvd 검색을 진행합니다. ===========");
         String title = inputInfo("DVD 제목: ");
         List<Dvd> dvdByTitle = findDvdByTitle(title);
@@ -69,6 +68,30 @@ public class DvdManage implements Appservice {
         for (Dvd dvd : dvdByTitle) {
             System.out.println(dvd);
         }
+    }
 
+    private static void deleteDvd() {
+        System.out.println("\n========== Dvd 삭제를 진행하기에 앞서 검색을 진행합니다. ===========");
+        String title = inputInfo("삭제할 DVD 제목: ");
+        List<Dvd> dvdByTitle = findDvdByTitle(title);
+        if(dvdByTitle.isEmpty()) {
+            System.out.println("*********** 검색 결과가 없습니다 **********");
+            return;
+        }
+        System.out.println("*********** 검색 결과는 다음과 같습니다 **********");
+        for (Dvd dvd : dvdByTitle) {
+            System.out.println(dvd);
+        }
+        System.out.println("\n##### DVD 정보 확인 후 삭제할 DVD의 '식별번호'를 입력하세요.");
+        int dvdNumber = inputNumber(">>> ");
+        for (Dvd dvd : dvdByTitle) {
+            if(dvd.getDvdNumber() == dvdNumber) {
+                deleteDvdFromDb(dvdNumber);
+                System.out.println("##### 삭제 완료!!!");
+                showDvdList();
+                return;
+            }
+        }
+        System.out.println("##### 번호를 잘못 입력했습니다. 상위 메뉴로 이동합니다.");
     }
 }

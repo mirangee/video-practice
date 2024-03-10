@@ -55,4 +55,13 @@ public class DvdRepository {
         }
         return searchedDvdList;
     }
+
+    public static void deleteDvdFromDb(int number) {
+        for (int dvdNumber : dvdDatabase.keySet()) {
+            if (dvdNumber == number) {
+                dvdDatabase.remove(dvdNumber);
+                break;
+            }
+        }
+    }
 }
