@@ -37,10 +37,14 @@ public class Dvd {
                 ", 제작연도: " + madeYear +
                 ", 대여료: " + fee +
                 ", 대여가능 여부: " + flag +
-                ", 대여자: " + rentalUser.getName() +
+                ", 대여자: " + adjustUserName() +
                 ", 반납 예정일: " + dueDate;
     }
 
+    private String adjustUserName() {
+        if(rentalUser == null) return "없음";
+        else return rentalUser.getName();
+    }
     public int getFee() {
         return fee;
     }

@@ -13,8 +13,6 @@ public class Rent {
     private LocalDate rentDate; // 대여 일자
     private LocalDate dueDate; // 반납 예정 일자
 
-    private LocalDate returnDate; // 실제 반납 일자
-
     private boolean late = false; // 연체 여부
     private int lateFee = 0; // 연체료
 
@@ -33,10 +31,7 @@ public class Rent {
                 ", 대여 회원: " + user.getName() +
                 ", 대여료: " + fee + "원" +
                 ", 대여일: " + rentDate +
-                ", 반납예정일: " + dueDate +
-                ", 반납처리일: " + returnDate +
-                ", 연체 여부: " + late +
-                ", 연체료: " + lateFee + "원";
+                ", 반납예정일: " + dueDate;
     }
 
     public Dvd getDvd() {
@@ -77,14 +72,6 @@ public class Rent {
 
     public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
-    }
-
-    public LocalDate getReturnDate() {
-        return returnDate;
-    }
-
-    public void setReturnDate(LocalDate returnDate) {
-        this.returnDate = returnDate;
     }
 
     public boolean isLate() {

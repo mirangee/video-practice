@@ -3,6 +3,7 @@ package video.rent.service;
 import video.common.Appservice;
 import video.dvd.domain.Dvd;
 import video.dvd.repository.DvdRepository;
+import video.rent.domain.CalcLateDays;
 import video.rent.domain.Rent;
 import video.user.domain.User;
 
@@ -111,6 +112,33 @@ public class RentManage implements Appservice {
     }
 
     private void returnDvd() {
+        System.out.println("\n========== DVD 반납 처리 코너입니다 ==========");
+        Map<Integer, Dvd> dvdByAvailability = DvdRepository.findDvdByAvailability(false);
+        if (dvdByAvailability.isEmpty()) {
+            System.out.println("********* 대여 중인 DVD가 없습니다 **********");
+            return;
+        }
+        System.out.println("********* 반납 처리가 필요한 DVD 목록입니다. **********");
+        for (Dvd dvd : dvdByAvailability.values()) {
+            int lateFee = CalcLateDays.calcLateDays(dvd);
+            System.out.println(dvd);
+            if (lateFee > 0) {
+                System.out.println("####### 연체가 발생했습니다 #######");
+                System.out.printf("###연체료: %d원", lateFee);
+            }
+        }
+        System.out.println("\n반납 처리할 DVD의 '식별번호'를 입력하세요.");
+        int num = inputNumber(">>> ");
+        for (Dvd dvd : dvdByAvailability.values()) {
+            if (dvd.getDvdNumber() == num) {
+                dvd.setAvailability(true); // 대여가능 여부 가능으로 변경
+                dvd.setRentalUser(null); // 대여자 없음으로 변경
+                dvd.setDueDate(null); // 반납예정일 없음으로 변경
+                System.out.println("\n******** 반납 처리를 완료했습니다 *********");
+                return;
+            }
+        }
+        System.out.println("잘못된 입력값입니다.");
     }
 
 
