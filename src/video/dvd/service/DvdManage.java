@@ -1,6 +1,7 @@
-package video.dvd;
+package video.dvd.service;
 
 import video.common.Appservice;
+import video.dvd.domain.Dvd;
 
 import java.util.List;
 import java.util.Map;

@@ -1,6 +1,6 @@
 package video.dvd.repository;
 
-import video.dvd.Dvd;
+import video.dvd.domain.Dvd;
 
 import java.util.ArrayList;
 import java.util.HashMap;

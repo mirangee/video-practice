@@ -1,7 +1,7 @@
 package video.main;
 
 import video.common.Appservice;
-import video.dvd.DvdManage;
+import video.dvd.service.DvdManage;
 import video.user.service.UserManage;
 
 public class AppController {

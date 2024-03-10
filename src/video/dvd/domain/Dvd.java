@@ -1,4 +1,4 @@
-package video.dvd;
+package video.dvd.domain;
 
 import video.user.domain.User;
 
@@ -8,6 +8,10 @@ public class Dvd {
     private String title; // 제목
     private String nation; // 국가
     private int madeYear; // 제작연도
+
+    private int fee; //대여료
+
+
     private boolean availability; // 대여가능 여부
     private User rentalUser; //대여회원
 
@@ -16,6 +20,7 @@ public class Dvd {
         this.title = title;
         this.nation = nation;
         this.madeYear = madeYear;
+        this.fee = DvdCharge.feeCharge(this);
         this.availability = true;
     }
 
@@ -27,6 +32,7 @@ public class Dvd {
                 ", 제목: " + title +
                 ", 국가: " + nation +
                 ", 제작연도: " + madeYear +
+                ", 대여료: " + fee +
                 ", 대여가능 여부: " + flag +
                 ", 대여자: " + rentalUser;
     }
