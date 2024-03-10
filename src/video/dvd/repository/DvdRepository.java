@@ -2,7 +2,9 @@ package video.dvd.repository;
 
 import video.dvd.Dvd;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DvdRepository {
@@ -42,5 +44,15 @@ public class DvdRepository {
 
     public static void addDvd(Dvd newDvd) {
         dvdDatabase.put(newDvd.getDvdNumber(), newDvd);
+    }
+
+    public static List<Dvd> findDvdByTitle(String title) {
+        List<Dvd> searchedDvdList = new ArrayList<>();
+        for (Dvd dvd : dvdDatabase.values()) {
+            if(dvd.getTitle().equals(title)) {
+                searchedDvdList.add(dvd);
+            }
+        }
+        return searchedDvdList;
     }
 }

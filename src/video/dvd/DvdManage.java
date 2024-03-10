@@ -1,12 +1,11 @@
 package video.dvd;
 
 import video.common.Appservice;
-import video.dvd.repository.DvdRepository;
-import video.user.repository.UserRepository;
 
+import java.util.List;
 import java.util.Map;
 
-import static video.dvd.repository.DvdRepository.addDvd;
+import static video.dvd.repository.DvdRepository.*;
 import static video.ui.AppUi.*;
 
 
@@ -40,7 +39,7 @@ public class DvdManage implements Appservice {
     }
 
     private static void showDvdList() {
-        Map<Integer, Dvd> dvdList = DvdRepository.getDvdDatabase();
+        Map<Integer, Dvd> dvdList = getDvdDatabase();
         System.out.println("\n====================== 우리 가게 DVD 목록 ====================");
         for (Dvd dvd : dvdList.values()) {
             System.out.println(dvd);
@@ -59,5 +58,17 @@ public class DvdManage implements Appservice {
     }
 
     private void searchDvd() {
+        System.out.println("\n========== Dvd 검색을 진행합니다. ===========");
+        String title = inputInfo("DVD 제목: ");
+        List<Dvd> dvdByTitle = findDvdByTitle(title);
+        if(dvdByTitle.isEmpty()) {
+            System.out.println("*********** 검색 결과가 없습니다 **********");
+            return;
+        }
+        System.out.println("*********** 검색 결과는 다음과 같습니다 **********");
+        for (Dvd dvd : dvdByTitle) {
+            System.out.println(dvd);
+        }
+
     }
 }
